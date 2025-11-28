@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "STM32",
+            "intelliSenseMode": "gcc-arm",
+            "compilerPath": "C:/ST/STM32CubeCLT_1.15.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc.exe",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++17",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ]
+        }
+    ],
+    "version": 4
+}

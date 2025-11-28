@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug STM32G474",
+            "cwd": "${workspaceFolder}",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "stlink",
+            "executable": "${workspaceFolder}/build/g4_experiment.elf",
+            "device": "STM32G474xx",
+            "stlinkPath": "ST-LINK_gdbserver.exe",
+            "runToEntryPoint": "main",
+            "svdFile": "${workspaceFolder}/STM32G474.svd"
+        }
+    ]
+}
