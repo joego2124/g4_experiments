@@ -1,9 +1,15 @@
-#include <stdint.h>
+#include "gpio.h"
+#include "rcc.h"
 
-extern int foo ();
 
 int main () {
-    uint8_t bar = foo();
-    bar++;
-    return 0;
+    // enable GPIOA RCC
+    RCC->AHB2ENR |= 0x1;
+
+    // set up A5 as high output for led
+    GPIOA->MODER &= ~(0b11 << (5 * 2));
+    GPIOA->MODER |=  (0b01 << (5 * 2));
+    GPIOA->ODR   |=  (0b01 << 5);
+
+    while (1);
 }

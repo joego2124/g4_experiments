@@ -16,23 +16,25 @@ get_filename_component(CURR_PROJECT_NAME g4_experiment NAME)
 
 # Generic compiler settings
 add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
-add_compile_options(-g -O0 -Wall -Werror)
-add_link_options(-Wl,-gc-sections,--print-memory-usage)
+add_compile_options(-O0 -Wall -Werror)
+add_link_options(-Wl,--print-memory-usage)
+# add_link_options(-Wl,-gc-sections,--print-memory-usage)
 
 add_executable(${CURR_PROJECT_NAME}.elf
     main.c
-    foo.c
 
     startup_stm32g474xx.c
 )
 
-include_directories(./)
+include_directories(
+    ./
+    hal
+)
 
 target_compile_definitions(${CURR_PROJECT_NAME}.elf PUBLIC CORE_CM4 STM32G4 STM32G474xx DEBUG)
 
 target_compile_options(${CURR_PROJECT_NAME}.elf PUBLIC -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -nolibc -nostartfiles)
 target_link_options(${CURR_PROJECT_NAME}.elf PUBLIC -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-m4 -nolibc -nostartfiles)
-# target_link_options(${CURR_PROJECT_NAME}.elf PUBLIC --specs=nosys.specs -u_printf_float -u_scanf_float)
 
 target_link_options(${CURR_PROJECT_NAME}.elf PUBLIC LINKER:-Map=${CURR_PROJECT_NAME}.map)
 target_link_options(${CURR_PROJECT_NAME}.elf PUBLIC -T${CMAKE_SOURCE_DIR}/STM32G474RET.ld)

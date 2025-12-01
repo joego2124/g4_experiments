@@ -1,17 +1,27 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Configure CMake Project",
-			"type": "shell",
-			"command": "cmake",
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake Clean",
+            "type": "shell",
+            "command": "rm -rf build",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Configure CMake Project",
+            "type": "shell",
+            "command": "cmake",
             "args": [
-                "-G", "Ninja",
+                "-G",
+                "Ninja",
                 "-DCMAKE_BUILD_TYPE=Debug",
                 "-DCMAKE_C_COMPILER=arm-none-eabi-gcc",
                 "-DCMAKE_CXX_COMPILER=arm-none-eabi-g++",
-                "-S", "${workspaceFolder}",
-                "-B", "${workspaceFolder}\\build"
+                "-S",
+                "${workspaceFolder}",
+                "-B",
+                "${workspaceFolder}\\build"
             ],
             "options": {
                 "shell": {
@@ -20,31 +30,29 @@
                 }
             },
             "group": "build",
-			"presentation": {
-				"reveal": "always",
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
+            "presentation": {
+                "reveal": "always",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "Build Project",
             "type": "shell",
             "command": "ninja",
-            "args": [
-                "-C", "${workspaceFolder}\\build"
-            ],
+            "args": ["-C", "${workspaceFolder}\\build"],
             "options": {
                 "shell": {
                     "executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                     "args": ["-NoProfile", "-Command"]
                 }
             },
-            "dependsOn": "CMake Configure",
+            "dependsOn": "Configure CMake Project",
             "group": "build",
             "presentation": {
-				"reveal": "always",
-				"clear": true
-			},
+                "reveal": "always",
+                "clear": true
+            },
             "problemMatcher": []
         }
     ]
