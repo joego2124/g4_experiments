@@ -12,7 +12,14 @@
             "stlinkPath": "ST-LINK_gdbserver.exe",
             "stm32cubeprogrammer": "C:\\ST\\STM32CubeCLT_1.15.0\\STM32CubeProgrammer\\bin",
             "runToEntryPoint": "main",
-            "svdFile": "${workspaceFolder}/STM32G474.svd"
+            "svdFile": "${workspaceFolder}/STM32G474.svd",
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 4
+            },
+            // "preLaunchCommands": [
+            //     "set output-radix 16"
+            // ]
         }
     ]
 }

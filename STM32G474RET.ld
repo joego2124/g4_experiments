@@ -20,6 +20,12 @@ SECTIONS {
         _edata = .;
     } > RAM AT > FLASH
 
+    .rodata : ALIGN(4) {
+        _srodata = .;
+        *(.rodata*)
+        _erodata = .;
+    } > FLASH
+
     _idata = LOADADDR(.data);
 
     .bss : ALIGN(4) {

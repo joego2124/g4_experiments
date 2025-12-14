@@ -1,5 +1,7 @@
 #include "stdint.h"
 
+#define MCU_FREQ 144000000  // 144 MHz
+
 #define RCC_BASE 0x40021000UL
 
 typedef struct {
@@ -46,3 +48,5 @@ typedef struct {
 } rcc_t;
 
 #define RCC ((rcc_t *) RCC_BASE)
+
+void rcc_init_hse(void);

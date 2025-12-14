@@ -24,17 +24,19 @@ void reset_handler() {
 	while(1); // should never get here
 }
 
-__attribute__((weak))
-void hardfault_handler() {
-	while(1);
-}
+void __attribute__((weak)) hardfault_handler() { while(1); }
+
+void __attribute__((weak)) nmi_handler() { while(1); }
+
+void __attribute__((weak)) TIM3_irq_handler() {}
 
 // MCU's interrupt vector table
-typedef void (*iv_t)(void); // helper type def of "void f(void)"
-__attribute__((used, section(".ivt"))) // tell linker to not throw away and give it a name
+typedef void (*iv_t)(void); 			// helper type def of "void f(void)"
+__attribute__((used, section(".ivt")))  // tell linker to not throw away and give it a name
 static const iv_t ivt[115] = {
-	(iv_t)&_estack,
-	reset_handler,
-	0,
-	hardfault_handler,
+	[0]	 = (iv_t)&_estack,
+	[1]  = reset_handler,
+	[2]  = nmi_handler,
+	[3]  = hardfault_handler,
+	[4 ... 114] = TIM3_irq_handler,
 };
