@@ -21,3 +21,9 @@ void transmit_byte(usart_t* handle, uint8_t b) {
     // write to TDR
     handle->TDR = b;
 }
+
+void transmit_str(usart_t* handle, char *str, uint32_t len) {
+    for (uint32_t i = 0; i < len; i++) {
+        transmit_byte(handle, (uint8_t) *(str + i));
+    }
+}

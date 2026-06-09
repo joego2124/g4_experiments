@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "irq.h"
 
 extern int main();
 
@@ -28,15 +29,19 @@ void __attribute__((weak)) hardfault_handler() { while(1); }
 
 void __attribute__((weak)) nmi_handler() { while(1); }
 
-void __attribute__((weak)) TIM3_irq_handler() {}
+void __attribute__((weak)) default_handler() { while(1); }
+
+void __attribute__((weak)) TIM2_irq_handler() {}
 
 // MCU's interrupt vector table
 typedef void (*iv_t)(void); 			// helper type def of "void f(void)"
 __attribute__((used, section(".ivt")))  // tell linker to not throw away and give it a name
-static const iv_t ivt[115] = {
+static const iv_t ivt[STM32G4_VECTOR_COUNT] = {
 	[0]	 = (iv_t)&_estack,
 	[1]  = reset_handler,
 	[2]  = nmi_handler,
 	[3]  = hardfault_handler,
-	[4 ... 114] = TIM3_irq_handler,
+	[4 ... STM32G4_VECTOR_INDEX(TIM2_IRQn) - 1] = default_handler,
+	[STM32G4_VECTOR_INDEX(TIM2_IRQn)] = TIM2_irq_handler,
+	[STM32G4_VECTOR_INDEX(TIM2_IRQn) + 1 ... STM32G4_VECTOR_COUNT - 1] = default_handler,
 };

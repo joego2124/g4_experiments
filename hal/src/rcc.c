@@ -2,6 +2,9 @@
 #include "flash.h"
 
 void rcc_init_hse() {
+    /*
+        Configure PLL for MCU_FREQ
+    */
     // enable HSE
     RCC->CR |= (0b1 << 16);
 
@@ -18,7 +21,7 @@ void rcc_init_hse() {
     RCC->PLLCFGR |=  (0b10   << 21);       // set Q divisor to 6
     RCC->PLLCFGR &= ~(0b11   << 25);       // set R divisor to 2
     RCC->PLLCFGR &= ~(127U   << 8);        // clear N mult
-    RCC->PLLCFGR |=  (24U    << 8);        // set N mult to 24
+    RCC->PLLCFGR |=  (72U    << 8);        // set N mult to 72
     RCC->PLLCFGR |=  (0b0001 << 4);        // set M divisor to 2
     RCC->PLLCFGR |=  (0b1    << 24);       // set PLLREN
     // 4. Enable the PLL again by setting PLLON to 1.
@@ -34,4 +37,16 @@ void rcc_init_hse() {
 
     // wait for switch complete
     while ((RCC->CFGR & (0b11 << 2)) != (0b11 << 2));
+
+    /*
+        Project specific code
+    */
+    // enable SYSCFG RCC
+    RCC->APB2ENR |= 0b1;
+
+    // enable GPIOB and GPIOB RCC
+    RCC->AHB2ENR |= 0b110;
+
+    // enable TIM2 and TIM3 RCC
+    RCC->APB1ENR1 |= 0b11;
 }

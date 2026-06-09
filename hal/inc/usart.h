@@ -31,3 +31,5 @@ typedef struct {
 void init_vcp_uart(uint32_t baud_rate);
 
 void transmit_byte(usart_t* handle, uint8_t b);
+
+void transmit_str(usart_t* handle, char *str, uint32_t len);

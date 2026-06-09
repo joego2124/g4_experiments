@@ -31,7 +31,8 @@ add_executable(${CURR_PROJECT_NAME}.elf
     hal/src/rcc.c
     hal/src/usart.c
     hal/src/gpio.c
-    startup_stm32g474xx.c
+    syscalls.c
+    startup.c
 )
 
 include_directories(
@@ -42,7 +43,7 @@ include_directories(
 target_compile_definitions(${CURR_PROJECT_NAME}.elf PUBLIC
     CORE_CM4
     STM32G4
-    STM32G474xx
+    STM32G431xx
     DEBUG
 )
 
@@ -66,6 +67,6 @@ target_link_options(${CURR_PROJECT_NAME}.elf PUBLIC
 )
 
 target_link_options(${CURR_PROJECT_NAME}.elf PUBLIC LINKER:-Map=${CURR_PROJECT_NAME}.map)
-target_link_options(${CURR_PROJECT_NAME}.elf PUBLIC -T${CMAKE_SOURCE_DIR}/STM32G474RET.ld)
+target_link_options(${CURR_PROJECT_NAME}.elf PUBLIC -T${CMAKE_SOURCE_DIR}/STM32G431CBU.ld)
 
 set(ELF_FILE "${CMAKE_BINARY_DIR}/${CURR_PROJECT_NAME}.elf")

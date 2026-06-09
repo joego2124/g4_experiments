@@ -16,10 +16,24 @@
             "liveWatch": {
                 "enabled": true,
                 "samplesPerSecond": 4
-            },
-            // "preLaunchCommands": [
-            //     "set output-radix 16"
-            // ]
+            }
+        },
+        {
+            "name": "Debug STM32G431",
+            "cwd": "${workspaceFolder}",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "stlink",
+            "executable": "${workspaceFolder}/build/g4_experiment.elf",
+            "device": "STM32G431xx",
+            "stlinkPath": "ST-LINK_gdbserver.exe",
+            "stm32cubeprogrammer": "C:\\ST\\STM32CubeCLT_1.15.0\\STM32CubeProgrammer\\bin",
+            "runToEntryPoint": "main",
+            "svdFile": "${workspaceFolder}/STM32G431.svd",
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 4
+            }
         }
     ]
 }
